@@ -1,6 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
+import proyectoContext from '../../context/proyectos/ProyectoContext';
 
 const FormNuevoProyecto = () => {
+
+    const proyectosContext = useContext(proyectoContext);
+    const {nuevoProyecto, mostrarFormulario} = proyectosContext;
 
     const [proyecto, setProyecto] = useState({
         nombre: ''
@@ -30,28 +34,35 @@ const FormNuevoProyecto = () => {
         <button
             type="button"
             className="btn btn-block btn-primario"
+            onClick={() => mostrarFormulario()}
             >Nuevo Proyecto</button>
+        {
+            nuevoProyecto
+            ?
+            (
+                <form
+                    className="formulario-nuevo-proyecto"
+                    onSubmit={onSubmitProyecto}
+                >
+                    <input
+                        type="text"
+                        className="input-text"
+                        placeholder="Nombre del proyecto"
+                        name="nombre"
+                        value={proyecto.nombre}
+                        onChange={onChangeProyecto}
+                    />
 
-        <form
-            className="formulario-nuevo-proyecto"
-            onSubmit={onSubmitProyecto}
-        >
-            <input
-                type="text"
-                className="input-text"
-                placeholder="Nombre del proyecto"
-                name="nombre"
-                value={proyecto.nombre}
-                onChange={onChangeProyecto}
-            />
+                    <input
+                        type="submit"
+                        className="btn btn-block btn-primario"
+                        value="Agregar Proyecto"
+                    />
 
-            <input
-                type="submit"
-                className="btn btn-block btn-primario"
-                value="Agregar Proyecto"
-            />
-
-        </form>
+                </form>
+            )
+            : null
+        }
             </Fragment>
      );
 }
