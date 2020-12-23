@@ -5,7 +5,8 @@ import ProyectoReducer from './ProyectoReducer';
 import { 
     FORMULARIO_PROYECTO, 
     OBTENER_PROYECTOS,
-    AGREGAR_PROYECTO 
+    AGREGAR_PROYECTO,
+    VALIDAR_FORM_NUEVO_PROYECTO
 } from '../../types'; //no se pone el nombre del archivo porque es index.js
 
 
@@ -19,7 +20,8 @@ const ProyectoState = props => {
 
     const initialState = {
         nuevoProyecto : false, //para que se muestre o no el form de nuevo proyecto
-        proyectos : [] //almacena todos los proyectos
+        proyectos : [], //almacena todos los proyectos
+        errorFormulario: false //si no completo el nombre u otro error para que se vea el mensaje de error
     }
 
     const [state, dispatch] = useReducer(ProyectoReducer, initialState);
@@ -49,14 +51,23 @@ const ProyectoState = props => {
         })
     }
 
+    //Mostrar error por validacion de formulario
+    const mostrarError = () => {
+        dispatch({
+            type: VALIDAR_FORM_NUEVO_PROYECTO
+        })
+    }
+    
     return (
         <ProyectoContext.Provider
             value={{
+                errorFormulario: state.errorFormulario,
                 nuevoProyecto: state.nuevoProyecto,
                 proyectos: state.proyectos,
                 mostrarFormulario,
                 obtenerProyectos,
-                agregarProyecto
+                agregarProyecto,
+                mostrarError
             }}
         >
             {props.children}
