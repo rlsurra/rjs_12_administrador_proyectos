@@ -5,14 +5,14 @@ import proyectoContext from '../../context/proyectos/ProyectoContext';
 const ListadoTareas = () => {
 
     const proyectosContext = useContext(proyectoContext);
-    const { proyectoSeleccionado } = proyectosContext;
+    const { proyectoSeleccionado, eliminarProyecto } = proyectosContext;
 
     const tareas = [
         {nombre: 'Elegir Plataforma', estado: true},
         {nombre: 'Elegir Colores', estado: false},
     ]
 
-    if(!proyectoSeleccionado) return null;
+    if(!proyectoSeleccionado) return <h2>Por favor, seleccione un proyecto</h2>;
 
     return ( 
         <Fragment>
@@ -33,6 +33,7 @@ const ListadoTareas = () => {
             <button
                 type="button"
                 className="btn btn-eliminar"
+                onClick={() => eliminarProyecto(proyectoSeleccionado)}
             >
                 Eliminar Proyecto &times;
             </button>
