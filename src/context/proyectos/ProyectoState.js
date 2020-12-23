@@ -6,7 +6,8 @@ import {
     FORMULARIO_PROYECTO, 
     OBTENER_PROYECTOS,
     AGREGAR_PROYECTO,
-    VALIDAR_FORM_NUEVO_PROYECTO
+    VALIDAR_FORM_NUEVO_PROYECTO,
+    PROYECTO_ACTUAL
 } from '../../types'; //no se pone el nombre del archivo porque es index.js
 
 
@@ -21,7 +22,8 @@ const ProyectoState = props => {
     const initialState = {
         nuevoProyecto : false, //para que se muestre o no el form de nuevo proyecto
         proyectos : [], //almacena todos los proyectos
-        errorFormulario: false //si no completo el nombre u otro error para que se vea el mensaje de error
+        errorFormulario: false, //si no completo el nombre u otro error para que se vea el mensaje de error
+        proyectoSeleccionado: null
     }
 
     const [state, dispatch] = useReducer(ProyectoReducer, initialState);
@@ -57,13 +59,23 @@ const ProyectoState = props => {
             type: VALIDAR_FORM_NUEVO_PROYECTO
         })
     }
-    
+
+    //Seleccionar el proyecto
+    const seleccionarProyecto = proyecto => {
+        dispatch({
+            type: PROYECTO_ACTUAL,
+            payload: proyecto
+        })
+    }
+
     return (
         <ProyectoContext.Provider
             value={{
                 errorFormulario: state.errorFormulario,
                 nuevoProyecto: state.nuevoProyecto,
                 proyectos: state.proyectos,
+                proyectoSeleccionado: state.proyectoSeleccionado,
+                seleccionarProyecto,
                 mostrarFormulario,
                 obtenerProyectos,
                 agregarProyecto,

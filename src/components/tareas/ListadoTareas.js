@@ -1,16 +1,22 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import Tarea from './Tarea';
+import proyectoContext from '../../context/proyectos/ProyectoContext';
 
 const ListadoTareas = () => {
+
+    const proyectosContext = useContext(proyectoContext);
+    const { proyectoSeleccionado } = proyectosContext;
 
     const tareas = [
         {nombre: 'Elegir Plataforma', estado: true},
         {nombre: 'Elegir Colores', estado: false},
     ]
 
+    if(!proyectoSeleccionado) return null;
+
     return ( 
         <Fragment>
-            <h2>Proyecto: Tienda Virtual</h2>
+            <h2>Proyecto: {proyectoSeleccionado.nombre}</h2>
             <ul className="listado-tareas">
                 {tareas.length === 0
                 ?

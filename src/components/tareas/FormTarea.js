@@ -1,6 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import proyectoContext from '../../context/proyectos/ProyectoContext';
 
 const FormTarea = () => {
+      
+    const proyectosContext = useContext(proyectoContext);
+    const { proyectoSeleccionado } = proyectosContext;
+
+    if(!proyectoSeleccionado) return <h2>Por favor, seleccione un proyecto</h2>;
+
     return ( 
         <div className="formulario">
             <form>
