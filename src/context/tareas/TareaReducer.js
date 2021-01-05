@@ -15,7 +15,7 @@ export default (state, action) => {
         case AGREGAR_TAREA:
             return {
                 ...state,
-                tareas: [...state.tareas, action.payload], //Se hace en el tareas general, no en el del proyecto, dsp se filtra
+                tareas: [action.payload, ...state.tareas], //Se hace en el tareas general, no en el del proyecto, dsp se filtra
                 errorTarea: false
             }
         case VALIDAR_FORM_NUEVA_TAREA:
