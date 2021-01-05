@@ -1,12 +1,15 @@
 import React, {useReducer} from 'react';
 import TareaContext from './TareaContext';
 import TareaReducer from './TareaReducer';
+import {v4 as uuid} from 'uuid';
 import {
     AGREGAR_TAREA, 
     TAREAS_PROYECTO, 
     VALIDAR_FORM_NUEVA_TAREA, 
     ELIMINAR_TAREA,
-    ESTADO_TAREA
+    ESTADO_TAREA,
+    TAREA_ACTUAL,
+    ACTUALIZAR_TAREA
 } from '../../types';
 
 const TareaState = props => {
@@ -21,6 +24,7 @@ const TareaState = props => {
             {id: 6, nombre: 'Elegir Frame', estado: false, proyectoId: 1},
         ],
         tareasProyecto: null,
+        tareaSeleccionada: null,
         errorTarea: false
 
     }
@@ -40,6 +44,7 @@ const TareaState = props => {
 
     //Agregar una tarea a un proyecto
     const agregarTarea = tarea => {
+        tarea.id = uuid();
         dispatch({
             type: AGREGAR_TAREA,
             payload: tarea
@@ -67,17 +72,36 @@ const TareaState = props => {
         })
     }
 
+    //Extraigo una tarea para edicion
+    const guardarTareaActual = tarea => {
+        dispatch({
+            type: TAREA_ACTUAL,
+            payload: tarea
+        })
+    }
+
+    //Edicion del nombre de una tarea
+    const actualizarTarea = tarea => {
+        dispatch({
+            type: ACTUALIZAR_TAREA,
+            payload: tarea
+        })
+    }
+
     return (
         <TareaContext.Provider
             value={{
                 tareas: state.tareas,
                 tareasProyecto: state.tareasProyecto,
                 errorTarea: state.errorTarea,
+                tareaSeleccionada: state.tareaSeleccionada,
                 obtenerTareas,
                 agregarTarea,
                 validarTarea,
                 eliminarTarea,
-                setEstadoTarea
+                setEstadoTarea,
+                guardarTareaActual,
+                actualizarTarea
             }}
         >
             {props.children}

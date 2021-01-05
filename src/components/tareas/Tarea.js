@@ -11,7 +11,7 @@ const Tarea = ({tarea}) => {
     
     //Obtener la funcion de eliminar del context de tarea
     const tareasContext = useContext(TareaContext);
-    const { eliminarTarea, obtenerTareas, setEstadoTarea } = tareasContext;
+    const { eliminarTarea, obtenerTareas, setEstadoTarea, guardarTareaActual } = tareasContext;
 
     const modificarEstadoTarea = tarea =>{
         if(tarea.estado){
@@ -37,6 +37,7 @@ const Tarea = ({tarea}) => {
                 <button
                     type="button"
                     className="btn btn-primario"
+                    onClick={() => guardarTareaActual(tarea)}
                 >
                     Editar
                 </button>
