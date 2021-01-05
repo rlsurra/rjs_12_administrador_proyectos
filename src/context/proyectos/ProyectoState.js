@@ -62,10 +62,11 @@ const ProyectoState = props => {
     }
 
     //Seleccionar el proyecto
-    const seleccionarProyecto = proyecto => {
+    const seleccionarProyecto = id => {
+        console.log(id);
         dispatch({
             type: PROYECTO_ACTUAL,
-            payload: proyecto
+            payload: id
         })
     }
 

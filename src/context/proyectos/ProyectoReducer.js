@@ -34,7 +34,7 @@ export default (state, action) => {
         case PROYECTO_ACTUAL:
             return {
                 ...state,
-                proyectoSeleccionado: state.proyectos.filter(proyecto => proyecto.id === action.payload.id)[0]
+                proyectoSeleccionado: state.proyectos.filter(proyecto => proyecto.id === action.payload)[0]
             }
         case ELIMINAR_PROYECTO:
             return {
