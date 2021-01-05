@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import TareaContext from '../../context/tareas/TareaContext';
+import proyectoContext from '../../context/proyectos/ProyectoContext';
+    
 
 const Tarea = ({tarea}) => {
+
+    //Obtengo el proyecto actual
+    const proyectosContext = useContext(proyectoContext);
+    const { proyectoSeleccionado } = proyectosContext;
+    
+    //Obtener la funcion de eliminar del context de tarea
+    const tareasContext = useContext(TareaContext);
+    const { eliminarTarea, obtenerTareas } = tareasContext;
 
     return ( 
         <li className="tarea sombra">
@@ -23,6 +34,10 @@ const Tarea = ({tarea}) => {
                 <button
                     type="button"
                     className="btn btn-secundario"
+                    onClick = {() => {
+                        eliminarTarea(tarea.id);
+                        obtenerTareas(proyectoSeleccionado.id);
+                    }}
                 >
                     Eliminar
                 </button>
