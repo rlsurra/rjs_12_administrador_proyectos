@@ -4,10 +4,12 @@ import Login from './components/auth/Login';
 import Registro from './components/auth/Registro';
 import Proyectos from './components/proyectos/Proyectos';
 import ProyectoState from './context/proyectos/ProyectoState';
+import TareaState from './context/tareas/TareaState';
 
 function App() {
   return (
     <ProyectoState>
+      <TareaState>
       <Router>
         {/* Lo que se ve en todas las paginas */}
         <Switch>
@@ -17,6 +19,7 @@ function App() {
           <Route exact path="/proyectos" component={Proyectos} />
         </Switch>
       </Router>
+      </TareaState>
     </ProyectoState>
   );
 }
