@@ -4,7 +4,8 @@
   "description": "MERN API para el Proyecto de Administrador de Proyectos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "author": "Rodrigo López Surra",
   "license": "ISC",
