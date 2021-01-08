@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 app.use('/api/usuarios', require('./routes/usuarios')); //Cada uno de estos es un middleware
 app.use('/api/auth', require('./routes/auth')); //Cada uno de estos es un middleware
 app.use('/api/proyectos', require('./routes/proyectos'));
+app.use('/api/tareas', require('./routes/tareas'));
 
 //Arrancar la app
 app.listen(PORT, () => {
