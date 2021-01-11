@@ -8,7 +8,7 @@ exports.autenticarUsuario = async (req, res) => {
     //Revisamos la validación de express en routes
     const errores = validationResult(req);
     if(!errores.isEmpty()){
-        return res.status(400).json({errores: errores.array()})
+        return res.status(400).json({msg: errores.array()[0].msg})
     }
 
     const { email, password } = req.body;
@@ -46,5 +46,15 @@ exports.autenticarUsuario = async (req, res) => {
         
     } catch (error) {
         console.log(error);
+    }
+}
+
+exports.usuarioAutenticado = async (req, res) => {
+    try {
+        const usuario = await Usuario.findById(req.usuario.id).select('-password');
+        res.json({usuario})
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({msg: 'Hubo un error'})
     }
 }

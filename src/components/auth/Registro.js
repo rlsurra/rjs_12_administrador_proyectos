@@ -1,12 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AlertaContext from '../../context/alertas/AlertaContext';
+import AuthContext from '../../context/autenticacion/AuthContext';
 
-const Registro = () => {
+const Registro = (props) => {
 
     //Extraemos valores del contexto
     const alertaContext = useContext(AlertaContext);
     const { alerta, mostrarAlerta } = alertaContext;
+
+    //Extraigo valores del contexto
+    const authContext = useContext(AuthContext);
+    const { mensaje, autenticado, registrarUsuario } = authContext;
+
+    //En caso el usuario se haya registrado, autenticado o sea registro duplicado
+    useEffect(() => {
+        if(autenticado) props.history.push('/proyectos');
+        if(mensaje) mostrarAlerta(mensaje.msg, mensaje.categoria);
+    }, [mensaje, autenticado, props.history])
 
     const [ credencial, setCredencial] = useState({
         nombre: '',
@@ -33,7 +44,7 @@ const Registro = () => {
             password2.trim() === '' ){
                 mostrarAlerta('Todos los campos son obligatorios','alerta-error');
                 return;
-            }
+        }
         //Validar longitud minima del password (6 caracteres)
         if(password.length < 6){
             mostrarAlerta('El password debe ser de al menos 6 caracteres','alerta-error');
@@ -45,7 +56,11 @@ const Registro = () => {
             return;
         } 
         //Pasarlo al action (funcion del reducer)
-
+        registrarUsuario({
+            nombre,
+            email,
+            password
+        })
     }
 
     return ( 
