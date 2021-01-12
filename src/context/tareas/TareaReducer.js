@@ -3,7 +3,6 @@ import {
     AGREGAR_TAREA,
     VALIDAR_FORM_NUEVA_TAREA,
     ELIMINAR_TAREA,
-    ESTADO_TAREA,
     TAREA_ACTUAL,
     ACTUALIZAR_TAREA
  } from '../../types'; 
@@ -32,7 +31,6 @@ export default (state, action) => {
                 tareasProyecto: state.tareasProyecto.filter(tarea => tarea._id !== action.payload)
             }
         case ACTUALIZAR_TAREA:
-        case ESTADO_TAREA:
             return {
                 ...state,
                 tareasProyecto: state.tareasProyecto.map(tarea => tarea._id === action.payload._id ? action.payload : tarea),

@@ -6,7 +6,6 @@ import {
     TAREAS_PROYECTO, 
     VALIDAR_FORM_NUEVA_TAREA, 
     ELIMINAR_TAREA,
-    ESTADO_TAREA,
     TAREA_ACTUAL,
     ACTUALIZAR_TAREA
 } from '../../types';
