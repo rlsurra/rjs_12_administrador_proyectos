@@ -29,7 +29,7 @@ exports.crearTarea = async (req, res) => {
         const tarea = new Tarea(req.body);
         tarea.save();
         //Agregado de una tarea
-        res.status(200).send({msg : 'La tarea se creo en forma exitosa'})
+        res.status(200).send(tarea)
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
@@ -43,7 +43,7 @@ exports.obtenerTareas = async (req, res) => {
     try {
         //Chequeamos que el proyecto exista
         const {proyecto} = req.query; //Se pasa por params
-        //console.log(proyecto);
+        console.log(req.query);
         const existeProyecto = await Proyecto.findById(proyecto);
         //proyecto tiene que tener lo que espera un objid id que son determinada cantidad de caracteres, sino sale por el catch
         if(existeProyecto === null){

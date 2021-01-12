@@ -62,7 +62,7 @@ const FormTarea = () => {
 
         
         //Vuelvo a cargar las tareas
-        obtenerTareas(proyectoSeleccionado.id);
+        obtenerTareas(proyectoSeleccionado._id);
 
         //reiniciar el form
         setTarea({
