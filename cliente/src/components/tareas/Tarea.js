@@ -14,6 +14,7 @@ const Tarea = ({tarea}) => {
     const { eliminarTarea, obtenerTareas, guardarTareaActual, actualizarTarea } = tareasContext;
 
     const modificarEstadoTarea = tarea => {
+        console.log(tarea);
         if(tarea.estado){
             tarea.estado = false;
         } else {
