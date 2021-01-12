@@ -11,18 +11,18 @@ const Tarea = ({tarea}) => {
     
     //Obtener la funcion de eliminar del context de tarea
     const tareasContext = useContext(TareaContext);
-    const { eliminarTarea, obtenerTareas, setEstadoTarea, guardarTareaActual } = tareasContext;
+    const { eliminarTarea, obtenerTareas, guardarTareaActual, actualizarTarea } = tareasContext;
 
-    const modificarEstadoTarea = tarea =>{
+    const modificarEstadoTarea = tarea => {
         if(tarea.estado){
             tarea.estado = false;
         } else {
             tarea.estado = true
         }
-        setEstadoTarea(tarea);
+        actualizarTarea(tarea);
     }
 
-    return ( 
+     return ( 
         <li className="tarea sombra">
             <p>{tarea.nombre}</p>
             <div className="estado">
@@ -45,8 +45,8 @@ const Tarea = ({tarea}) => {
                     type="button"
                     className="btn btn-secundario"
                     onClick = {() => {
-                        eliminarTarea(tarea.id);
-                        obtenerTareas(proyectoSeleccionado.id);
+                        eliminarTarea(tarea._id);
+                        obtenerTareas(proyectoSeleccionado._id);
                     }}
                 >
                     Eliminar

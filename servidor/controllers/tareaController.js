@@ -42,8 +42,8 @@ exports.obtenerTareas = async (req, res) => {
 
     try {
         //Chequeamos que el proyecto exista
-        const {proyecto} = req.body;
-        console.log(proyecto);
+        const {proyecto} = req.query; //Se pasa por params
+        //console.log(proyecto);
         const existeProyecto = await Proyecto.findById(proyecto);
         //proyecto tiene que tener lo que espera un objid id que son determinada cantidad de caracteres, sino sale por el catch
         if(existeProyecto === null){
@@ -77,13 +77,11 @@ exports.actualizarTarea = async (req, res) => {
         if(nombre){
             nuevaTarea.nombre = nombre
         }
-        if(estado){
-            nuevaTarea.estado = estado
-        }
+        nuevaTarea.estado = estado
 
         tarea = await Tarea.findOneAndUpdate({ _id: req.params.id }, nuevaTarea, { new: true })
 
-        res.status(200).json({msg : 'La tarea se actualizó en forma exitosa'})
+        res.status(200).json(tarea)
 
     } catch (error) {
         console.log(error);

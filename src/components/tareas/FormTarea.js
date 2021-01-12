@@ -54,8 +54,7 @@ const FormTarea = () => {
             //pasar la validacion -> lo hacemos en AGREGAR_TAREA
     
             //agregar la tarea
-            tarea.proyectoId = proyectoSeleccionado.id;
-            tarea.estado = false;
+            tarea.proyecto = proyectoSeleccionado._id;
             agregarTarea(tarea);
         } else { //Tarea existente
             actualizarTarea(tarea)
