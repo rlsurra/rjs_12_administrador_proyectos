@@ -16,7 +16,7 @@ exports.crearProyecto = async (req, res) => {
         proyecto.creador = req.usuario.id;
         //Guardamos el proyecto
         proyecto.save();
-        res.status(200).send({msg : 'El proyecto se creo en forma exitosa'})
+        res.status(200).send(proyecto)
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');
